@@ -10,6 +10,7 @@ read.data <- function() {
 
     data <- read.csv("household_power_consumption.txt", header=F, sep=";", skip=66637, nrow=2880)
     colnames(data) <- colnames(header)
-
-    data$Date <- as.Date(data$Date)
+    data$DateTime <- paste(data$Date, data$Time, sep=" ")
+    data$DateTime <- strptime(data$DateTime, format="%e/%m/%Y %H:%M:%S")
+    data
 }
